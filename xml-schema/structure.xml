@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    <xs:element name="campeonato">        
+        <xs:complexType> 
+            <xs:sequence> 
+                <xs:element name="nome" type="stringMax50"/>
+                <xs:element name="ano" type="integerMax4" minOccurs="0"/>
+                <xs:element name="nroClubes" type="integerMax2"/>
+                
+                <xs:element name="tecnicos" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="tecnico" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nome" type="stringMax50"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="clubes" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="clube" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nome" type="stringMax50"/>
+                                        <xs:element name="dtFundacao" type="xs:date"/>
+                                        <xs:element name="clubeTecnico" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:attribute name="idTecnico" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>                
+                
+                <xs:element name="posicoes" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="posicao" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nome" type="stringMax50"/>
+                                        <xs:element name="jogador" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="nome" type="stringMax50"/>
+                                                    <xs:element name="clubeJogador" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:attribute name="idClube" type="xs:positiveInteger" use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>                            
+                                    </xs:sequence>
+                                    <xs:attribute name="idPosicao" type="xs:positiveInteger" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="rodadas" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="rodada" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="totalJogos" type="integerMax2"/>
+                                        <xs:element name="totalAmarelos" type="integerMax3"/>
+                                        <xs:element name="totalVermelhos" type="integerMax3"/>
+                                        <xs:element name="totalGols" type="integerMax3"/>
+                                        <xs:element name="classificacaoRodada" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="posicao" type="integerMax2" minOccurs="1" maxOccurs="1"/>
+                                                    <xs:element name="totalPontos" type="integerMax3"/>
+                                                    <xs:element name="totalVitorias" type="integerMax2"/>
+                                                    <xs:element name="totalEmpates" type="integerMax2"/>
+                                                    <xs:element name="totalDerrotas" type="integerMax2"/>
+                                                    <xs:element name="totalGolsPro" type="integerMax3"/>
+                                                    <xs:element name="totalGolsContra" type="integerMax3"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="idClube" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="jogo" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="clube1Gol" type="integerMax2"/>
+                                                    <xs:element name="clube2Gol" type="integerMax2"/>
+                                                    <xs:element name="clube1Amarelo" type="integerMax2"/>
+                                                    <xs:element name="clube2Amarelo" type="integerMax2"/>
+                                                    <xs:element name="clube1Vermelho" type="integerMax2"/>
+                                                    <xs:element name="clube2Vermelho" type="integerMax2"/>
+                                                    <xs:element name="clube1Ponto" type="integerMax1"/>
+                                                    <xs:element name="clube2Ponto" type="integerMax1"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="idClube1" type="xs:positiveInteger" use="required"/>
+                                                <xs:attribute name="idClube2" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                               
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+        
+        <xs:key name="tecnicoKey">
+            <xs:selector xpath=".//tecnico"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:key name="rodadaKey">
+            <xs:selector xpath=".//rodada"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:key name="clubeKey">
+            <xs:selector xpath=".//clube"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:key name="posicaoKey">
+            <xs:selector xpath=".//idPosicao"/>
+            <xs:field xpath="@idPosicao"/>
+        </xs:key>
+        <xs:key name="jogador">
+            <xs:selector xpath=".//jogador"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:keyref name="clubeTecnicoFK" refer="tecnicoKey">
+            <xs:selector xpath=".//clubeTecnico"/>
+            <xs:field xpath="@idTecnico"/>
+        </xs:keyref>
+        <xs:keyref name="classificacaoRodadaFK" refer="clubeKey">
+            <xs:selector xpath=".//classificacaoRodada"/>
+            <xs:field xpath="@idClube"/>
+        </xs:keyref>
+        <xs:keyref name="jogoFK1" refer="clubeKey">
+            <xs:selector xpath=".//jogoRodada"/>
+            <xs:field xpath="@idClube1"/>
+        </xs:keyref>
+        <xs:keyref name="jogoFK2" refer="clubeKey">
+            <xs:selector xpath=".//jogo"/>
+            <xs:field xpath="@idClube2"/>
+        </xs:keyref>
+        <xs:keyref name="clubeJogadorFK1" refer="clubeKey">
+            <xs:selector xpath=".//clubeJogador"/>
+            <xs:field xpath="@idClube"/>
+        </xs:keyref>
+    </xs:element>
+    
+    <xs:simpleType name="stringMax50"> 
+        <xs:restriction base="xs:string"> 
+            <xs:maxLength value="50"/> 	
+        </xs:restriction> 
+    </xs:simpleType>
+    <xs:simpleType name="integerMax4"> 
+        <xs:restriction base="xs:integer"> 
+            <xs:minInclusive value="0"/>
+            <xs:totalDigits value="4"/> 	
+        </xs:restriction> 
+    </xs:simpleType>
+    <xs:simpleType name="integerMax3"> 
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:totalDigits value="3"/> 	
+        </xs:restriction> 
+    </xs:simpleType>
+    <xs:simpleType name="integerMax2"> 
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:totalDigits value="2"/> 	
+        </xs:restriction> 
+    </xs:simpleType>
+    <xs:simpleType name="integerMax1"> 
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:totalDigits value="1"/> 	
+        </xs:restriction> 
+    </xs:simpleType>
+</xs:schema>

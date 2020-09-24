@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<campeonato id="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/Users/bruno/eclipse-workspace/TrabalhoGA1/Trabalho%202%20-%20xsd_xml/structure.xml">
+    <nome>Campeonato Teste</nome>
+    <ano>1</ano>
+    <nroClubes>10</nroClubes>
+    <tecnicos>
+        <tecnico id="1">
+            <nome>Renato Gaúcho</nome>
+        </tecnico>
+        <tecnico id="2">
+            <nome>Renato Gaúcho</nome>
+        </tecnico>
+    </tecnicos>
+    <clubes>
+        <clube id="1">
+            <nome>Grêmio</nome>
+            <dtFundacao>2020-12-12</dtFundacao>
+            <clubeTecnico idTecnico="1"/>
+        </clube>
+        <clube id="2">
+            <nome>Inter</nome>
+            <dtFundacao>2020-12-12</dtFundacao>
+            <clubeTecnico idTecnico="1"/>
+        </clube>
+    </clubes>
+    <posicoes>
+        <posicao idPosicao="1">
+            <nome>Posição 1</nome>
+            <jogador id="1">
+                <nome>Pepe</nome>
+                <clubeJogador idClube="1"/>
+            </jogador>
+            <jogador id="2">
+                <nome>Maicon</nome>
+                <clubeJogador idClube="1"/>
+            </jogador>
+            <jogador id="3">
+                <nome>Cuesta</nome>
+                <clubeJogador idClube="2"/>
+            </jogador>
+        </posicao>
+    </posicoes>
+    
+    <rodadas>
+        <rodada id="1">
+            <totalJogos>10</totalJogos>
+            <totalAmarelos>10</totalAmarelos>
+            <totalVermelhos>10</totalVermelhos>
+            <totalGols>10</totalGols>
+            <classificacaoRodada idClube="1">
+                <posicao>1</posicao>
+                <totalPontos>1</totalPontos>
+                <totalVitorias>1</totalVitorias>
+                <totalEmpates>1</totalEmpates>
+                <totalDerrotas>1</totalDerrotas>
+                <totalGolsPro>1</totalGolsPro>
+                <totalGolsContra>1</totalGolsContra>
+            </classificacaoRodada>
+            <jogo idClube1="1" idClube2="2">
+                <clube1Gol>1</clube1Gol>
+                <clube2Gol>2</clube2Gol>
+                <clube1Amarelo>1</clube1Amarelo>
+                <clube2Amarelo>2</clube2Amarelo>
+                <clube1Vermelho>1</clube1Vermelho>
+                <clube2Vermelho>2</clube2Vermelho>
+                <clube1Ponto>2</clube1Ponto>
+                <clube2Ponto>1</clube2Ponto>
+            </jogo>
+        </rodada>
+    </rodadas>    
+</campeonato>
